@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+
+<style>
+#div1 {width:60px;height:60px;padding:10px;border:1px solid #aaaaaa;}
+#div2 {width:60px;height:60px;padding:10px;border:1px solid #aaaaaa;}
+#div3 {width:60px;height:60px;padding:10px;border:1px solid #aaaaaa;}
+#div4 {width:60px;height:60px;padding:10px;border:1px solid #aaaaaa;}
+#div5 {width:60px;height:60px;padding:10px;border:1px solid #aaaaaa;}
+#div6 {width:60px;height:60px;padding:10px;border:1px solid #aaaaaa;}
+#div7 {width:60px;height:60px;padding:10px;border:1px solid #aaaaaa;}
+#div8 {width:60px;height:60px;padding:10px;border:1px solid #aaaaaa;}
+#div9 {width:60px;height:60px;padding:10px;border:1px solid #aaaaaa;}
+#div10 {width:60px;height:60px;padding:10px;border:1px solid #aaaaaa;}
+#div11 {width:60px;height:60px;padding:10px;border:1px solid #aaaaaa;}
+#div12 {width:60px;height:60px;padding:10px;border:1px solid #aaaaaa;}
+#div13 {width:60px;height:60px;padding:10px;border:1px solid #aaaaaa;}
+#div14 {width:60px;height:60px;padding:10px;border:1px solid #aaaaaa;}
+#div15 {width:60px;height:60px;padding:10px;border:1px solid #aaaaaa;}
+#div16 {width:60px;height:60px;padding:10px;border:1px solid #aaaaaa;}
+
+    .divTable
+    {
+        display:  table;
+        width:auto;
+        background-color:#eee;
+        border:1px solid  #666666;
+        border-spacing:5px;/*cellspacing:poor IE support for  this*/
+       /* border-collapse:separate;*/
+    }
+
+    .divRow
+    {
+       display:table-row;
+       width:auto;
+    }
+
+    .divCell
+    {
+        float:left;/*fix for  buggy browsers*/
+        display:table-column;
+        width:200px;
+        background-color:#ccc;
+    }
+
+
+</style>
+
+</head>
+<body>
+
+<div align='center'>   Mix and Fix it !  <br><br>
+<div class='divTable'>
+<div class='divRow'>
+<div class='divCell' id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+<div id="div2" class='divCell' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<div id="div3" class='divCell'  ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<div id="div4" class='divCell' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+</div>
+<div class='divRow'>
+
+<div id="div5" class='divCell' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<div id="div6" class='divCell' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<div id="div7"class='divCell' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<div id="div8" class='divCell' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+</div>
+
+<div class='divRow'>
+<div id="div9" class='divCell' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<div id="div10" class='divCell' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<div id="div11" class='divCell' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<div id="div12" class='divCell' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+</div>
+
+<div class='divRow'>
+<div id="div13" class='divCell' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<div id="div14" class='divCell' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<div id="div15" class='divCell' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<div id="div16" class='divCell' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+</div>
+</div><br>
+
+    <Button name="init"  value="init" onclick='document.location.reload(true)'> New Game </Button>
+</div>
+
+<script>
+
+var from = '';
+var to = '';
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+	from = ev.currentTarget.parentElement.id;
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function canMove(ev, from, to){
+	if((typeof(ev.target.currentSrc) == 'undefined') &&
+	((Math.abs(from - to) == 1) || (Math.abs(from - to) == 4))){
+		return true;
+	}
+	alert("Only neighboring cells in X and Y axis can be dragged to empty place.");
+	return false;
+}
+
+function drop(ev) {
+    ev.preventDefault();
+	from = from.substr(3,from.length);
+	to = ev.target.id;
+	to = to.substr(3,to.length);
+    var data = ev.dataTransfer.getData("text");
+	if(canMove(ev,from, to)){
+    	ev.target.appendChild(document.getElementById(data));
+	}
+}
+
+function shuffle(array) {
+    var i = array.length,
+        j = 1,
+        temp;
+    while (i--) {
+        j = Math.floor(Math.random() * (i+1));
+        // swap randomly chosen element with current element
+        temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
+
+
+function init(){
+	var nums = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
+	shaffeld  = shuffle(nums);
+	j=1;
+	for(i=0;i<shaffeld.length;i++,j++){
+		if (shaffeld[i] != 16){
+			divid = "div"+j;
+			imageId = "drag"+shaffeld[i];
+			document.getElementById(divid).innerHTML=
+				"<img id='"+imageId+"' src='images/"+shaffeld[i] +".jpg' draggable='true' ondragstart='drag(event)' >";
+		}
+	}
+}
+
+init();
+</script>
+</body>
+</html>
