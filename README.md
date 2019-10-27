@@ -1,2 +1,2 @@
 # Mix and Fix
-A game for kids. 15 numbers are provided on a 4 X 4  board. User can drag numbers only on the X or Y axis if there is an empty neighboring cell. Game is over if user can order all numbers and leave cell #16 empty
+A game. 15 numbers are provided randomly on a 4 X 4 board. User can drag numbers only on X and Y-axis provided if there is an empty neighbor cell. Game is over if user can order all numbers and leave  the cell #16 empty. Play the game here http://barayeazadi.com/fix.html
